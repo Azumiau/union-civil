@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light">
+    <title>Unión Civil - Andrea & Leonardo</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pearlPage: '#F4F2F5',
+                        pearlCard: '#FAF8FC',
+                        lavenderSoft: '#E6E0EB',
+                        lavenderBorder: '#9B8BA9',
+                        plumDark: '#2D0B5A',
+                        purpleAccent: '#6B4C8A',
+                        purpleLight: '#9B7CB6',
+                        fuchsiaAccent: '#B83280',
+                        silverLine: '#DCD8E4'
+                    },
+                    fontFamily: {
+                        cursive: ['"Dancing Script"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { color-scheme: light only; supported-color-schemes: light; }
+
+        html, body {
+            background-color: #F4F2F5 !important;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            color: #2D0B5A !important;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .perspective-1000 { perspective: 1000px; }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 290px;
+            height: 200px;
+            background: linear-gradient(135deg, #E6E0EB 0%, #D8CFDF 100%) !important;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png"), linear-gradient(135deg, #E6E0EB 0%, #D8CFDF 100%) !important;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(45, 11, 90, 0.18), 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #9B8BA9;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        @media (min-width: 640px) {
+            .envelope-wrapper { width: 360px; height: 240px; }
+        }
+
+        .envelope-flap {
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 145px solid transparent; border-right: 145px solid transparent;
+            border-top: 115px solid #CFC4D7;
+            transform-origin: top;
+            transition: transform 0.7s ease-in-out, z-index 0.2s ease-in-out;
+            z-index: 4;
+            filter: drop-shadow(0 3px 6px rgba(45, 11, 90, 0.15));
+        }
+
+        @media (min-width: 640px) {
+            .envelope-flap { border-left-width: 180px; border-right-width: 180px; border-top-width: 140px; }
+        }
+
+        .envelope-pocket {
+            position: absolute; bottom: 0; left: 0; width: 0; height: 0;
+            border-left: 145px solid #D8CFDF; border-right: 145px solid #D8CFDF;
+            border-bottom: 105px solid #C4B7CE; border-top: 95px solid transparent;
+            border-radius: 0 0 12px 12px;
+            z-index: 3; pointer-events: none;
+        }
+
+        @media (min-width: 640px) {
+            .envelope-pocket { border-left-width: 180px; border-right-width: 180px; border-bottom-width: 130px; border-top-width: 110px; }
+        }
+
+        .envelope-letter {
+            position: absolute; bottom: 8px; left: 5%; width: 90%; height: 85%;
+            background: #FAF8FC !important;
+            border-radius: 8px; z-index: 2;
+            transition: transform 0.8s ease-in-out 0.3s, opacity 0.5s ease;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 12px;
+            border: 1px solid #DCD8E4;
+        }
+
+        .wax-seal {
+            position: absolute; top: 90px; left: 50%; transform: translateX(-50%);
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, #B83280 0%, #6B4C8A 100%) !important;
+            border: 2px solid #FFFFFF; border-radius: 50%; z-index: 5;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 18px rgba(184, 50, 128, 0.35);
+            transition: all 0.5s ease;
+            animation: pulse-seal 2s infinite ease-in-out;
+        }
+
+        @media (min-width: 640px) { .wax-seal { top: 115px; width: 60px; height: 60px; } }
+
+        @keyframes pulse-seal {
+            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 6px 18px rgba(184, 50, 128, 0.35); }
+            50% { transform: translateX(-50%) scale(1.08); box-shadow: 0 8px 24px rgba(184, 50, 128, 0.55); }
+        }
+
+        .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .wax-seal { opacity: 0; transform: translateX(-50%) scale(0.5); pointer-events: none; }
+        .envelope-wrapper.open .envelope-letter { transform: translateY(-100px) scale(1.02); z-index: 5; }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .silver-card { background: #FFFFFF !important; border: 1px solid #DCD8E4; box-shadow: 0 10px 30px rgba(45, 11, 90, 0.05); }
+        .white-heart-stroke { color: #FFFFFF; filter: drop-shadow(0px 3px 8px rgba(155, 124, 182, 0.35)); }
+    </style>
+</head>
+<body class="antialiased selection:bg-fuchsiaAccent selection:text-white bg-pearlPage text-plumDark">
+
+    <!-- PANTALLA 1: SOBRE VIRTUAL -->
+    <div id="envelope-screen" class="fixed inset-0 z-40 flex flex-col items-center justify-center px-4 transition-opacity duration-1000 bg-pearlPage">
+        <div class="text-center mb-8 px-4 max-w-sm">
+            <h1 class="font-cursive text-6xl sm:text-7xl text-plumDark font-bold mb-2 tracking-wide">¡Hola!</h1>
+            <p class="font-sans text-sm sm:text-base text-plumDark font-medium leading-relaxed">Tenemos una invitación especial para ti...</p>
+        </div>
+
+        <div class="perspective-1000 mb-8" onclick="openEnvelope()">
+            <div id="envelope" class="envelope-wrapper">
+                <div class="envelope-flap"></div>
+                <div class="envelope-letter text-center">
+                    <span class="font-sans text-fuchsiaAccent text-xs font-semibold mb-0.5 tracking-wider uppercase">Invitación Especial</span>
+                    <h3 class="font-cursive text-3xl sm:text-4xl text-plumDark font-bold">Andrea & Leonardo</h3>
+                    
+                    <div class="w-24 mx-auto my-1 text-fuchsiaAccent/60">
+                        <svg viewBox="0 0 160 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="w-full h-auto">
+                            <path d="M 5 10 C 25 5, 45 15, 70 10 C 76 9, 78 12, 80 13 C 82 12, 84 9, 90 10 C 115 15, 135 5, 155 10" />
+                            <circle cx="80" cy="10" r="1.5" fill="currentColor" />
+                        </svg>
+                    </div>
+
+                    <p class="font-sans text-[9px] sm:text-[10px] tracking-widest text-plumDark/70 uppercase font-semibold">Toca para abrir</p>
+                </div>
+                <div class="envelope-pocket"></div>
+                <div class="wax-seal">
+                    <i class="fa-solid fa-heart text-white text-lg sm:text-xl drop-shadow-sm"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button onclick="openEnvelope()" class="inline-flex items-center gap-2 bg-white text-plumDark border border-lavenderBorder px-6 py-3 rounded-full shadow-sm font-semibold text-xs tracking-wider uppercase hover:border-fuchsiaAccent transition-all transform active:scale-95">
+                <i class="fa-solid fa-sparkles text-fuchsiaAccent"></i>
+                <span>Toca el sobre para abrir</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 2: CONTENIDO DE LA TARJETA -->
+    <main id="main-content" class="hidden min-h-screen max-w-md mx-auto bg-pearlCard text-plumDark shadow-2xl relative overflow-hidden my-0 sm:my-8 sm:rounded-3xl border border-silverLine z-10">
+
+        <!-- PORTADA -->
+        <section class="min-h-[85vh] flex flex-col justify-between items-center text-center p-8 relative bg-gradient-to-b from-pearlCard via-lavenderSoft/30 to-pearlCard">
+            
+            <div class="reveal active w-full pt-4">
+                <div class="w-full max-w-[240px] mx-auto mb-3 text-purpleLight/70">
+                    <svg viewBox="0 0 300 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-auto">
+                        <path d="M 10 14 C 40 8, 70 20, 105 14 C 122 11, 134 16, 142 18" />
+                        <path d="M 158 18 C 166 16, 178 11, 195 14 C 230 20, 260 8, 290 14" />
+                        <path d="M 142 18 C 136 24, 130 10, 142 6 C 148 4, 150 14, 150 14" />
+                        <path d="M 158 18 C 164 24, 170 10, 158 6 C 152 4, 150 14, 150 14" />
+                        <circle cx="150" cy="14" r="2" fill="currentColor" opacity="0.8"/>
+                        <path d="M 147 16 C 143 23, 138 25, 133 24" opacity="0.6"/>
+                        <path d="M 153 16 C 157 23, 162 25, 167 24" opacity="0.6"/>
+                    </svg>
+                </div>
+
+                <p class="font-sans text-sm sm:text-base text-purpleAccent font-medium mb-1">
+                    Bienvenido a celebrar nuestra...
+                </p>
+
+                <p class="font-sans text-xs tracking-[0.25em] text-purpleAccent uppercase font-bold">
+                    UNIÓN CIVIL
+                </p>
+            </div>
+
+            <!-- NOMBRES -->
+            <div class="reveal active my-auto py-2 w-full">
+                <div class="relative flex items-center justify-center my-6 py-6">
+                    <svg class="absolute w-64 h-64 sm:w-72 sm:h-72 white-heart-stroke -z-0 pointer-events-none transform -translate-y-2" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 50,88 C 25,68 8,48 10,28 C 12,12 28,8 42,18 C 47,22 50,26 50,26 C 50,26 53,22 58,18 C 72,8 88,12 90,28 C 92,48 75,68 50,88 Z" />
+                        <path d="M 48,85 C 27,66 12,47 13,30 C 14,17 27,12 39,20 C 45,24 48,27 48,27" opacity="0.5" stroke-dasharray="2 1" />
+                    </svg>
+
+                    <div class="relative z-10 w-full px-2">
+                        <h1 class="font-cursive text-7xl sm:text-8xl text-fuchsiaAccent font-bold tracking-wide drop-shadow-sm leading-tight">Andrea</h1>
+                        <div class="font-cursive text-4xl sm:text-5xl text-purpleAccent my-0.5">&</div>
+                        <h1 class="font-cursive text-7xl sm:text-8xl text-fuchsiaAccent font-bold tracking-wide drop-shadow-sm leading-tight">Leonardo</h1>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-[260px] sm:max-w-[280px] mx-auto my-5 text-fuchsiaAccent/50">
+                    <svg viewBox="0 0 300 28" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="w-full h-auto">
+                        <path d="M 10 14 C 40 8, 70 20, 105 14 C 122 11, 134 16, 142 18" />
+                        <path d="M 158 18 C 166 16, 178 11, 195 14 C 230 20, 260 8, 290 14" />
+                        <path d="M 142 18 C 136 24, 130 10, 142 6 C 148 4, 150 14, 150 14" />
+                        <path d="M 158 18 C 164 24, 170 10, 158 6 C 152 4, 150 14, 150 14" />
+                        <circle cx="150" cy="14" r="2" fill="currentColor" opacity="0.7"/>
+                        <path d="M 147 16 C 143 23, 138 25, 133 24" opacity="0.6"/>
+                        <path d="M 153 16 C 157 23, 162 25, 167 24" opacity="0.6"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="reveal active w-full pb-4">
+                <p class="font-sans text-sm sm:text-base text-plumDark font-medium max-w-xs mx-auto leading-relaxed">
+                    Con inmensa alegría iniciamos nuestro camino hacia el matrimonio
+                </p>
+
+                <div class="mt-8 text-purpleAccent/60 animate-bounce">
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: DETALLES DE CEREMONIA, ALMUERZO Y RECEPCIÓN -->
+        <section class="py-10 px-6 bg-lavenderSoft/30 text-center relative border-t border-silverLine">
+            <div class="reveal max-w-sm mx-auto mb-6">
+                <h2 class="font-cursive text-4xl text-plumDark font-bold">Ceremonia y Celebración</h2>
+                <div class="w-full max-w-[200px] mx-auto mt-2 text-fuchsiaAccent/70">
+                    <svg viewBox="0 0 200 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="w-full h-auto">
+                        <path d="M 10 10 C 35 5, 55 15, 85 10 C 93 9, 96 12, 100 13 C 104 12, 107 9, 115 10 C 145 15, 165 5, 190 10" />
+                        <circle cx="100" cy="10" r="1.5" fill="currentColor" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="reveal max-w-sm mx-auto">
+                <div class="silver-card rounded-2xl p-6 text-left space-y-8">
+                    
+                    <!-- 1. CEREMONIA -->
+                    <div>
+                        <h3 class="font-sans text-lg text-plumDark font-bold mb-3 border-b border-silverLine/60 pb-2">
+                            1. Ceremonia de Unión Civil
+                        </h3>
+                        <p class="text-xs sm:text-sm text-plumDark/85 leading-relaxed font-normal mb-4 text-justify">
+                            Te invitamos cordialmente a acompañarnos en nuestra íntima ceremonia de Unión Civil, que será el primer paso para formalizar la unión de nuestras vidas.
+                        </p>
+                        <div class="space-y-2 text-xs text-plumDark/80 pl-1 mb-5 bg-pearlCard p-3.5 rounded-xl border border-silverLine/60">
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-regular fa-calendar text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Fecha:</strong> Martes 24 de Noviembre, 2026</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-regular fa-clock text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Hora:</strong> 12:30 hrs</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-building-columns text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Lugar:</strong> Registro Civil de Isla de Maipo</span>
+                            </p>
+                            <p class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-location-dot text-fuchsiaAccent w-4 text-center mt-0.5"></i>
+                                <span><strong>Dirección:</strong> Av. C. Cortés 121</span>
+                            </p>
+                        </div>
+
+                        <a href="https://maps.google.com/?q=Registro+Civil+Isla+de+Maipo+Av.+C.+Cort%C3%A9s+121" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center justify-center gap-2 w-full bg-white text-plumDark border border-lavenderBorder font-semibold py-2.5 px-4 rounded-xl text-xs tracking-wide hover:border-fuchsiaAccent transition-all shadow-sm">
+                            <i class="fa-solid fa-map-location-dot text-fuchsiaAccent text-sm"></i>
+                            <span>Ver Ubicación en Google Maps</span>
+                        </a>
+                    </div>
+
+                    <div class="border-t border-silverLine/80 pt-6"></div>
+
+                    <!-- 2. ALMUERZO -->
+                    <div>
+                        <h3 class="font-sans text-lg text-plumDark font-bold mb-3 border-b border-silverLine/60 pb-2">
+                            2. Almuerzo de celebración
+                        </h3>
+                        <p class="text-xs sm:text-sm text-plumDark/85 leading-relaxed font-normal mb-4 text-justify">
+                            Luego de la ceremonia, estaremos encantados de invitarte a un almuerzo para celebrar juntos, llenar este momento con tus buenos deseos y brindar por nuestro amor.
+                        </p>
+                        <div class="space-y-2 text-xs text-plumDark/80 pl-1 mb-5 bg-pearlCard p-3.5 rounded-xl border border-silverLine/60">
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-regular fa-clock text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Hora:</strong> Luego de la ceremonia</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-utensils text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Lugar:</strong> Restaurante El Japonés</span>
+                            </p>
+                            <p class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-location-dot text-fuchsiaAccent w-4 text-center mt-0.5"></i>
+                                <span><strong>Dirección:</strong> Isidora Goyenechea 3000, Local 106, Las Condes</span>
+                            </p>
+                        </div>
+
+                        <a href="https://maps.google.com/?q=El+Japon%C3%A9s+Isidora+Goyenechea+3000+Las+Condes" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center justify-center gap-2 w-full bg-white text-plumDark border border-lavenderBorder font-semibold py-2.5 px-4 rounded-xl text-xs tracking-wide hover:border-fuchsiaAccent transition-all shadow-sm">
+                            <i class="fa-solid fa-map-location-dot text-fuchsiaAccent text-sm"></i>
+                            <span>Ver Ubicación en Google Maps</span>
+                        </a>
+                    </div>
+
+                    <div class="border-t border-silverLine/80 pt-6"></div>
+
+                    <!-- 3. RECEPCIÓN EN CASA -->
+                    <div>
+                        <h3 class="font-sans text-lg text-plumDark font-bold mb-3 border-b border-silverLine/60 pb-2">
+                            3. Recepción en nuestro hogar
+                        </h3>
+                        <p class="text-xs sm:text-sm text-plumDark/85 leading-relaxed font-normal mb-4 text-justify">
+                            Finalmente, continuaremos la celebración ofreciendo una amena recepción a nuestro círculo cercano para poder compartir este lindo momento en su compañía.
+                        </p>
+                        <div class="space-y-2 text-xs text-plumDark/80 pl-1 bg-pearlCard p-3.5 rounded-xl border border-silverLine/60">
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-regular fa-clock text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Hora:</strong> A partir de las 6:00 PM (18:00 hrs)</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-house-chimney text-fuchsiaAccent w-4 text-center"></i>
+                                <span><strong>Lugar:</strong> Nuestro hogar</span>
+                            </p>
+                            <p class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-location-dot text-fuchsiaAccent w-4 text-center mt-0.5"></i>
+                                <span><strong>Dirección:</strong> V Centenario #2545, Puente Alto</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONTADOR Y CALENDARIO (CONFIGURADO A LA CEREMONIA) -->
+        <section class="py-10 px-6 text-center bg-pearlCard border-t border-silverLine">
+            <div class="reveal max-w-sm mx-auto">
+                <p class="font-sans text-sm sm:text-base text-plumDark font-semibold mb-6">
+                    ¡Estamos contando cada minuto para este gran día!
+                </p>
+
+                <!-- Grid de Timer -->
+                <div class="grid grid-cols-4 gap-2 max-w-xs mx-auto mb-8">
+                    <div class="silver-card p-2.5 rounded-xl text-center">
+                        <span id="days" class="font-sans text-2xl sm:text-3xl font-bold text-fuchsiaAccent block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase font-semibold text-plumDark/70 tracking-wider">Días</span>
+                    </div>
+                    <div class="silver-card p-2.5 rounded-xl text-center">
+                        <span id="hours" class="font-sans text-2xl sm:text-3xl font-bold text-fuchsiaAccent block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase font-semibold text-plumDark/70 tracking-wider">Horas</span>
+                    </div>
+                    <div class="silver-card p-2.5 rounded-xl text-center">
+                        <span id="minutes" class="font-sans text-2xl sm:text-3xl font-bold text-fuchsiaAccent block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase font-semibold text-plumDark/70 tracking-wider">Min</span>
+                    </div>
+                    <div class="silver-card p-2.5 rounded-xl text-center">
+                        <span id="seconds" class="font-sans text-2xl sm:text-3xl font-bold text-fuchsiaAccent block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase font-semibold text-plumDark/70 tracking-wider">Seg</span>
+                    </div>
+                </div>
+
+                <!-- Botones Agregar a Calendario (Ceremonia) -->
+                <div class="pt-2">
+                    <p class="text-xs text-plumDark/90 font-semibold mb-4 leading-relaxed">¿Deseas agendar esta fecha en tu calendario?</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ceremonia+de+Unión+Civil+-+Andrea+y+Leonardo&dates=20261124T153000Z/20261124T170000Z&details=Ceremonia+de+Unión+Civil+y+posterior+celebración.&location=Registro+Civil+de+Isla+de+Maipo,+Av.+C.+Cortés+121" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-lavenderBorder text-plumDark hover:border-fuchsiaAccent text-[10px] uppercase font-bold bg-white transition-all transform active:scale-95 shadow-sm">
+                            <i class="fa-brands fa-google text-fuchsiaAccent text-base"></i> Google Calendar
+                        </a>
+                        <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0AURL:https://maps.google.com/?q=Registro+Civil+Isla+de+Maipo+Av.+C.+Cort%C3%A9s+121%0ADTSTART:20261124T153000Z%0ADTEND:20261124T170000Z%0ASUMMARY:Ceremonia de Unión Civil - Andrea y Leonardo%0ADESCRIPTION:Ceremonia de Unión Civil en Registro Civil de Isla de Maipo%0ALOCATION:Registro Civil de Isla de Maipo, Av. C. Cortés 121%0AEND:VEVENT%0AEND:VCALENDAR" download="Ceremonia_Union_Civil_Andrea_Leonardo.ics" 
+                           class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-lavenderBorder text-plumDark hover:border-fuchsiaAccent text-[10px] uppercase font-bold bg-white transition-all transform active:scale-95 shadow-sm">
+                            <i class="fa-brands fa-apple text-fuchsiaAccent text-base"></i> Apple Calendar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: FOTO DE PAREJA ESTILO POLAROID -->
+        <section class="py-10 px-6 bg-lavenderSoft/20 border-t border-silverLine text-center">
+            <div class="reveal max-w-xs mx-auto">
+                <div class="bg-white p-4 pb-6 rounded-2xl shadow-md border border-silverLine transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                    <div class="overflow-hidden rounded-xl aspect-[4/5] bg-lavenderSoft mb-4">
+                        <img src="https://i.postimg.cc/L5hFmwyL/20261003-224922.jpg" alt="Andrea y Leonardo" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-cursive text-xl text-plumDark font-bold">♥ Oficialmente comprometidos ♥</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-6 bg-pearlCard text-center text-plumDark/70 text-xs font-semibold border-t border-silverLine">
+            <p>Andrea & Leonardo • Unión Civil</p>
+        </footer>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <script>
+        const eventDate = new Date(2026, 10, 24, 12, 30, 0).getTime();
+
+        function playPetals() {
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.3 },
+                    colors: ['#ffb6c1', '#dda0dd', '#e6e6fa'],
+                    shapes: ['circle', 'square'],
+                    gravity: 0.4,
+                    scalar: 1.2,
+                    drift: 1,
+                    ticks: 200
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.3 },
+                    colors: ['#ffb6c1', '#dda0dd', '#e6e6fa'],
+                    shapes: ['circle', 'square'],
+                    gravity: 0.4,
+                    scalar: 1.2,
+                    drift: -1,
+                    ticks: 200
+                });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const envelopeScreen = document.getElementById('envelope-screen');
+            const mainContent = document.getElementById('main-content');
+
+            envelope.classList.add('open');
+
+            setTimeout(() => {
+                envelopeScreen.style.opacity = '0';
+                setTimeout(() => {
+                    envelopeScreen.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                    initScrollReveal();
+                    initCountdown();
+                    playPetals();
+                }, 800);
+            }, 1000);
+        }
+
+        function initCountdown() {
+            function update() {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+                if (distance < 0) return;
+
+                document.getElementById('days').innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById('hours').innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+            }
+            update();
+            setInterval(update, 1000);
+        }
+
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            window.addEventListener('scroll', () => {
+                const windowHeight = window.innerHeight;
+                reveals.forEach(el => {
+                    if (el.getBoundingClientRect().top < windowHeight - 60) el.classList.add('active');
+                });
+            });
+            window.dispatchEvent(new Event('scroll'));
+        }
+    </script>
+</body>
+</html>
