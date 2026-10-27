@@ -65,14 +65,11 @@
             line-height: 1.4;
         }
 
-        /* Formato optimizado para camuflar el borde negro del JPG */
         .anime-group-char {
             width: 100%;
-            max-width: 340px;
+            max-width: 320px;
             height: auto;
-            border-radius: 20px;
-            /* Estos filtros ayudan a fusionar imágenes oscuras con fondos oscuros */
-            box-shadow: inset 0 0 20px #08060f, 0 0 25px rgba(255, 77, 140, 0.2);
+            filter: drop-shadow(0 0 18px rgba(255, 77, 140, 0.45));
             animation: floating 3s ease-in-out infinite;
             margin-bottom: 25px;
             display: block;
@@ -273,8 +270,7 @@
         <div id="cover" onclick="openInvitation()">
             <h2>¡Hola! Somos Azu y Shion<br>y tenemos un mensaje para ti...</h2>
             
-            <!-- Imagen con los 4 personajes actualizada -->
-            <img class="anime-group-char" src="WhatsApp_Image_2026-10-26_at_17.50.22-removebg-preview.jpg" alt="Personajes Bunny Chibi">
+            <img class="anime-group-char" src="personajes.png" alt="Personajes Bunny Chibi">
             
             <div class="tap-btn">Tocar para abrir</div>
         </div>
@@ -298,7 +294,6 @@
             
             <div class="divider"></div>
 
-            <!-- Detalles del evento + Botón de Mapa -->
             <div class="info-box">
                 <p><span>📅 Cuándo:</span> Sábado 21 de Noviembre</p>
                 <p><span>⏰ Hora:</span> Desde las 18:00 hrs. (hasta lo que aguantes)</p>
@@ -313,7 +308,6 @@
             
             <div class="divider"></div>
 
-            <!-- Dresscode + Botón Pinterest -->
             <div class="dresscode-sec">
                 <h3>Dresscode: BunnyGirls & BunnyBoys 🐰✨</h3>
                 <p>Solo orejitas, maquillaje, o el outfit completo ¡tú decides!</p>
@@ -324,7 +318,6 @@
                 </a>
             </div>
 
-            <!-- Botón WhatsApp Principal -->
             <div>
                 <a href="https://wa.me/569XXXXXXXX?text=¡Confirmo!%20Nos%20vemos%20en%20el%20carrete%20Bunny%20🔥" class="btn-whatsapp" target="_blank">
                     💬 Confirmar y entrar al Grupo VIP
