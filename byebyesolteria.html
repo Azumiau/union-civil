@@ -105,6 +105,18 @@
                 transform: scale(1.02);
             }
         }
+
+        /* Botón secundario outline rosado */
+        .btn-outline-pink {
+            background: transparent;
+            border: 1px solid #f472b6 !important;
+            outline: none !important;
+            color: #f472b6;
+            transition: all 0.25s ease;
+        }
+        .btn-outline-pink:hover {
+            background: rgba(244, 114, 182, 0.12);
+        }
     </style>
 </head>
 <body class="flex items-center justify-center p-4 sm:p-8 font-normal text-base">
@@ -169,8 +181,11 @@
         <!-- Sección Confirmación -->
         <div class="flex flex-col gap-3">
             <p class="text-gray-200 text-base font-normal">confirma tu asistencia para añadirte al grupo de whatsapp</p>
-            <a href="#" class="btn-confirm w-full py-3 px-6 rounded-xl flex items-center justify-center text-white text-base font-normal">
+            <a href="https://api.whatsapp.com/send?phone=56966479180&text=%C2%A1Hola%21%20Confirmo%20que%20ir%C3%A9%20al%20carrete%20para%20despedir%20su%20solter%C3%ADa" target="_blank" rel="noopener noreferrer" class="btn-confirm w-full py-3 px-6 rounded-xl flex items-center justify-center text-white text-base font-normal">
                 🥳 ¡Confirmar asistencia! 🥳
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=56966479180&text=Hola%2C%20no%20podr%C3%A9%20asistir%20al%20carrete%20para%20despedir%20su%20solter%C3%ADa" target="_blank" rel="noopener noreferrer" class="btn-outline-pink w-full py-3 px-6 rounded-xl flex items-center justify-center text-base font-normal">
+                No puedo asistir🥺
             </a>
         </div>
 
